@@ -3,8 +3,9 @@ require_relative '../../db/config'
 class Student < ActiveRecord::Base
 # implement your Student model here
   validates :email, format: { with: /.@.+\.../ }, uniqueness: true
-  validates :birthday, presence: true, if: :old_enough?
+  # validates :birthday, presence: true, if: :old_enough?
   validates :phone, format: { with: /\d{3}.*\d{3}.*\d{4}/ }
+  validates :age, numericality: { greater_than: 5}
 
   def name
   	"#{self.first_name} #{self.last_name}"
@@ -14,14 +15,10 @@ class Student < ActiveRecord::Base
   	now = Date.today
   	@age = now.year - self.birthday.year - ((now.month > self.birthday.month || (now.month == self.birthday.month && now.day >= self.birthday.day)) ? 0 : 1)
   end
-  def old_enough?
-  	@age.to_i > 4
-  end
+  # def old_enough?
+  	# @age.to_i > 4
+  # end
 end
-
-# def name_with_party
-#     "#{self.firstname} #{self.lastname} (#{self.party})"
-#   end
 
 
 
