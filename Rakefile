@@ -1,8 +1,9 @@
 require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
-# require_relative 'lib/students_importer'
+require_relative 'lib/students_importer'
 require_relative 'app/models/teacher'
+require_relative 'app/models/student'
 
 
 
@@ -27,7 +28,7 @@ end
 
 desc "populate the test database with sample data"
 task "db:populate" do
-  # StudentsImporter.import
+  StudentsImporter.import
   teacher = Teacher.create(name: "Armin Tamzarian", email: "atamzarian@hotmail.com", phone: "630-345-6789")
   teacher = Teacher.create(name: "Seymour Skinner", email: "sskinner@hotmail.com",   phone: "5551234567")
   teacher = Teacher.create(name: "Homer Simpson",   email: "homer@hotmail.com",      phone: "3123456789")
@@ -37,6 +38,7 @@ task "db:populate" do
   teacher = Teacher.create(name: "Hot Mess",        email: "mess@hotmail.com",       phone: "630-564-9876")
   teacher = Teacher.create(name: "Alphonso Soriano", email: "asoriano@gmail.com",     phone: "800-345-1234")
   teacher = Teacher.create(name: "Tom Berenger",    email: "tber@aol.com",           phone: "8882346789")
+  Student.all.each { |student| student.update_attribute(:teacher_id, rand(10) + 1) }
 
 end
 
