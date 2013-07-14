@@ -2,7 +2,7 @@ require_relative '../../db/config'
 
 class Student < ActiveRecord::Base
 # implement your Student model here
-  belongs_to :teacher
+  has_and_belongs_to_many :teachers
 
   validates :email, format: { with: /.@.+\.../ }, uniqueness: true
   # validates :birthday, presence: true, if: :old_enough?
