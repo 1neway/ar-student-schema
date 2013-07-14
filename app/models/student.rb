@@ -2,6 +2,8 @@ require_relative '../../db/config'
 
 class Student < ActiveRecord::Base
 # implement your Student model here
+  belongs_to :teacher
+
   validates :email, format: { with: /.@.+\.../ }, uniqueness: true
   # validates :birthday, presence: true, if: :old_enough?
   validates :phone, format: { with: /\d{3}.*\d{3}.*\d{4}/ }
