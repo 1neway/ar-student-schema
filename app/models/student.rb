@@ -7,7 +7,7 @@ class Student < ActiveRecord::Base
   validates :phone, format: { with: /\d{3}.*\d{3}.*\d{4}/ }
   validates :age, numericality: { greater_than: 5}
 
-  def name
+  def combined_name
   	"#{self.first_name} #{self.last_name}"
   end
 
